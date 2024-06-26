@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     NavMeshAgent agent;
     Vector2 mousePos;
     private Camera cam;
+    bool TreeNear = false;
+    GameObject TreeNearObj = null;
     void Start()
     {
         cam = Camera.main;
@@ -25,6 +27,29 @@ public class Player : MonoBehaviour
             Debug.Log("кнопка");
             agent.SetDestination(mousePos);
             
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse0) && TreeNear)
+        {
+            Debug.Log("Tree deleted");
+            Destroy(TreeNearObj);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("trigger");
+        if (other.gameObject.CompareTag("Tree"))
+        {
+            Debug.Log("tree");
+            TreeNear = true;
+            TreeNearObj = other.gameObject;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (TreeNear)
+        {
+            TreeNear = false;
+            TreeNearObj = null;
         }
     }
 }
