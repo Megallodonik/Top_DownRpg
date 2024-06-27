@@ -5,13 +5,17 @@ using UnityEngine.AI;
 public class Player : MonoBehaviour
 {
     [SerializeField] Transform target;
+    [SerializeField] GameObject MouseObj;
+    Mouse mouseScr;
     NavMeshAgent agent;
     Vector2 mousePos;
     private Camera cam;
     bool TreeNear = false;
     GameObject TreeNearObj = null;
+    
     void Start()
     {
+        mouseScr = MouseObj.GetComponent<Mouse>();
         cam = Camera.main;
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -28,13 +32,21 @@ public class Player : MonoBehaviour
             agent.SetDestination(mousePos);
             
         }
-        if (Input.GetKeyDown(KeyCode.Mouse0) && TreeNear)
+
+    }
+    public void OnTreeCut()
+    {
+        if (TreeNear)
         {
-            Debug.Log("Tree deleted");
-            Destroy(TreeNearObj);
+            if (TreeNearObj == mouseScr.TreeObjHere)
+            {
+                Debug.Log("Tree deleted");
+                Destroy(TreeNearObj);
+            }
+
         }
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         Debug.Log("trigger");
         if (other.gameObject.CompareTag("Tree"))
@@ -43,13 +55,19 @@ public class Player : MonoBehaviour
             TreeNear = true;
             TreeNearObj = other.gameObject;
         }
+
+
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        if (TreeNear)
+        if(TreeNear && other.gameObject.CompareTag("Tree")) 
         {
-            TreeNear = false;
-            TreeNearObj = null;
+ 
+                Debug.Log("no tree");
+                TreeNear = false;
+                TreeNearObj = null;
+           
         }
     }
+
 }
