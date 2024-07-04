@@ -2,20 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+
 public class Player : MonoBehaviour
 {
-    [SerializeField] Transform target;
-    [SerializeField] GameObject MouseObj;
-    Mouse mouseScr;
+
+
+
 
     Vector2 mousePos;
     private Camera cam;
     bool TreeNear = false;
     GameObject TreeNearObj = null;
-    
+    [SerializeField] GameObject AxeImg;
     void Start()
     {
-        mouseScr = MouseObj.GetComponent<Mouse>();
+
         cam = Camera.main;
 
     }
@@ -36,7 +38,7 @@ public class Player : MonoBehaviour
     {
         if (TreeNear)
         {
-            if (TreeNearObj == mouseScr.TreeObjHere)
+            if (TreeNearObj != null)
             {
                 Debug.Log("Tree deleted");
                 Destroy(TreeNearObj);
@@ -49,6 +51,7 @@ public class Player : MonoBehaviour
         Debug.Log("trigger");
         if (other.gameObject.CompareTag("Tree"))
         {
+            AxeImg.SetActive(true);
             Debug.Log("tree");
             TreeNear = true;
             TreeNearObj = other.gameObject;
@@ -60,7 +63,7 @@ public class Player : MonoBehaviour
     {
         if(TreeNear && other.gameObject.CompareTag("Tree")) 
         {
- 
+                AxeImg.SetActive(false);
                 Debug.Log("no tree");
                 TreeNear = false;
                 TreeNearObj = null;
