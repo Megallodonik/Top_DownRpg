@@ -31072,8 +31072,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 4222659409929281430}
   Tree: {fileID: 2055102311959635369, guid: 9fb66d8c9d3b5194a82e9eed65a54afb, type: 3}
-  radius: 0.5
   LaserCircle: {fileID: 1828462191}
+  radiusAroundPlayer: 3
+  speedAroundPlayer: 15
 --- !u!1 &1568629323
 GameObject:
   m_ObjectHideFlags: 0
