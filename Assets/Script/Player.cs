@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,18 +7,16 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-
+    
 
 
 
     Vector2 mousePos;
     private Camera cam;
-    bool TreeNear = false;
-    GameObject TreeNearObj = null;
-    [SerializeField] GameObject AxeImg;
+
     void Start()
     {
-
+        
         cam = Camera.main;
 
     }
@@ -34,41 +33,7 @@ public class Player : MonoBehaviour
         //}
 
     }
-    public void OnTreeCut()
-    {
-        if (TreeNear)
-        {
-            if (TreeNearObj != null)
-            {
-                Debug.Log("Tree deleted");
-                Destroy(TreeNearObj);
-            }
-
-        }
-    }
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        Debug.Log("trigger");
-        if (other.gameObject.CompareTag("Tree"))
-        {
-            AxeImg.SetActive(true);
-            Debug.Log("tree");
-            TreeNear = true;
-            TreeNearObj = other.gameObject;
-        }
 
 
-    }
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if(TreeNear && other.gameObject.CompareTag("Tree")) 
-        {
-                AxeImg.SetActive(false);
-                Debug.Log("no tree");
-                TreeNear = false;
-                TreeNearObj = null;
-           
-        }
-    }
 
 }

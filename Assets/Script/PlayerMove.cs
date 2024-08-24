@@ -19,7 +19,7 @@ public class PlayerMove : MonoBehaviour
 
         direction.x = joystick.Horizontal;
         direction.y = joystick.Vertical;
-        Debug.Log(direction);
+        
         //anim.SetFloat("move", Mathf.Max(Mathf.Abs(horizontal), Mathf.Abs(vertical)));
     }
     void FixedUpdate()

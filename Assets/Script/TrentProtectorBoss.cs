@@ -6,13 +6,15 @@ using static TrentProtectorBoss;
 
 public class TrentProtectorBoss : MonoBehaviour
 {
-    [SerializeField] Transform Player;
+    [SerializeField] Transform player;
     [SerializeField] GameObject Tree;
     //[SerializeField] float radius = 15;
     [SerializeField] GameObject LaserCircle;
     [SerializeField] float radiusAroundPlayer = 3f;
     [SerializeField] float speedAroundPlayer = 15f;
+    [SerializeField] List<GameObject> TreeList = new List<GameObject>();
     float positionX, positionY, angle = 0f;
+    public Attacks LastAttack;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,25 @@ public class TrentProtectorBoss : MonoBehaviour
     void Update()
     {
 
+    }
+
+    private void OnEnable()
+    {
+        TreeCutter.OnTreeCut += TreeCutter_OnTreeCut;
+    }
+
+    private void OnDisable()
+    {
+
+        TreeCutter.OnTreeCut -= TreeCutter_OnTreeCut;
+    }
+
+    private void TreeCutter_OnTreeCut(int TreeCount)
+    {
+        if (TreeCount >= 4)
+        {
+            StartCoroutine(ChooseAttack());
+        }
     }
 
     public enum Attacks
@@ -50,12 +71,28 @@ public class TrentProtectorBoss : MonoBehaviour
         StartCoroutine(AroundPlayerAttackCor()); 
     }
 
-    IEnumerator AroundPlayerAttackCor()
+    private void SquareAttack()
+    {
+        StartCoroutine(SquareAttackCor());
+    }
+
+    private IEnumerator SquareAttackCor()
+    {
+        for (int i = 0; i < TreeList.Count; i++)
+        {
+            TreeList[i].gameObject.SetActive(true);
+            yield return new WaitForSeconds(1f);
+        }
+        
+
+    }
+
+    private IEnumerator AroundPlayerAttackCor()
     {
         // босс вращается вокруг игрока
         for (int i = 0; i < 360; i++)
         {
-            Transform center = Player.transform;
+            Transform center = player.transform;
 
             positionX = center.position.x + Mathf.Cos(angle) * radiusAroundPlayer;
             positionY = center.position.y + Mathf.Sin(angle) * radiusAroundPlayer;
@@ -78,10 +115,10 @@ public class TrentProtectorBoss : MonoBehaviour
     }
 
 
-    IEnumerator LaserCircleRotation()
+    private IEnumerator LaserCircleRotation()
     {
         // вокруг босса вращается спрайт с лазером
-        for (int i = 0; i < 360; i++)
+        for (int i = 0; i < 180; i++)
         {
             Debug.Log("laserCircleRot coroutine");
             LaserCircle.transform.rotation *= Quaternion.Euler(0f, 0f, 10f);
@@ -92,27 +129,57 @@ public class TrentProtectorBoss : MonoBehaviour
     }
 
 
-    IEnumerator ChooseAttack()
+    private IEnumerator ChooseAttack()
     {
         int AttacksCount = Enum.GetNames(typeof(Attacks)).Length;
         int rnd = UnityEngine.Random.Range(0, AttacksCount);
         switch ((Attacks)rnd)
         {
             case Attacks.CircleAttack:
-                Debug.Log("circleAttack");
-                CircleAttack();
-                yield return new WaitForSeconds(3); 
-                break;
+                if (LastAttack != Attacks.CircleAttack)
+                {
+                    Debug.Log("circleAttack");
+                    CircleAttack();
+                    LastAttack = Attacks.CircleAttack;
+                    yield return new WaitForSeconds(3);
+                    break;
+                    
+                }
+                else
+                {
+                    StartCoroutine(ChooseAttack());
+                    break;
+                }
+
             case Attacks.SquareAttack:
-                Debug.Log("SqareAttack");
-                yield return new WaitForSeconds(3);
-                StartCoroutine(ChooseAttack());
-                break;
+                if (LastAttack != Attacks.SquareAttack)
+                {
+                    Debug.Log("SqareAttack");
+                    LastAttack = Attacks.SquareAttack;
+                    SquareAttack();
+                    yield return new WaitForSeconds(3);
+                    break;
+                }
+                else
+                {
+                    StartCoroutine(ChooseAttack());
+                    break;
+                }
             case Attacks.AroundPlayerAttack:
-                Debug.Log("AroundPlayerAttack");
-                AroundPlayerAttack();
-                yield return new WaitForSeconds(10); 
-                break;
+                if (LastAttack != Attacks.AroundPlayerAttack)
+                {
+                    Debug.Log("AroundPlayerAttack");
+                    AroundPlayerAttack();
+                    LastAttack = Attacks.AroundPlayerAttack;
+                    yield return new WaitForSeconds(10);
+                    break;
+                }
+                else
+                {
+                    StartCoroutine(ChooseAttack());
+                    break;
+                }
+
         }
         
    
