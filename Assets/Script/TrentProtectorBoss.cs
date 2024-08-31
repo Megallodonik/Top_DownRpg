@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static TrentProtectorBoss;
+using static UnityEngine.GraphicsBuffer;
 
-public class TrentProtectorBoss : MonoBehaviour
+public class TrentProtectorBoss : Boss
 {
     [SerializeField] Transform player;
     [SerializeField] GameObject Tree;
@@ -15,9 +16,13 @@ public class TrentProtectorBoss : MonoBehaviour
     [SerializeField] List<GameObject> TreeList = new List<GameObject>();
     float positionX, positionY, angle = 0f;
     public Attacks LastAttack;
+    private Rigidbody2D rb;
+    private float moveSpeed = 15f;
+    public int TreeCount;
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         StartCoroutine(ChooseAttack());
     }
 
@@ -30,19 +35,24 @@ public class TrentProtectorBoss : MonoBehaviour
     private void OnEnable()
     {
         TreeCutter.OnTreeCut += TreeCutter_OnTreeCut;
+       
     }
 
     private void OnDisable()
     {
 
         TreeCutter.OnTreeCut -= TreeCutter_OnTreeCut;
+        
     }
 
-    private void TreeCutter_OnTreeCut(int TreeCount)
+    private void TreeCutter_OnTreeCut()
     {
+       
+        TreeCount++;
         if (TreeCount >= 4)
         {
             StartCoroutine(ChooseAttack());
+            
         }
     }
 
@@ -78,6 +88,8 @@ public class TrentProtectorBoss : MonoBehaviour
 
     private IEnumerator SquareAttackCor()
     {
+        HitPlayer(-1);
+        TreeCount = 0;
         for (int i = 0; i < TreeList.Count; i++)
         {
             TreeList[i].gameObject.SetActive(true);
@@ -110,6 +122,13 @@ public class TrentProtectorBoss : MonoBehaviour
             }
             yield return new WaitForSeconds(0.01f);
         }
+        while (transform.position != new Vector3(0,0,0))
+        {
+            float step = moveSpeed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, 0), step);
+            yield return new WaitForSeconds(0.01f);
+        }
+
 
         StartCoroutine(ChooseAttack());
     }
@@ -123,6 +142,7 @@ public class TrentProtectorBoss : MonoBehaviour
             Debug.Log("laserCircleRot coroutine");
             LaserCircle.transform.rotation *= Quaternion.Euler(0f, 0f, 10f);
             yield return new WaitForSeconds(0.1f);
+            
         }
         LaserCircle.SetActive(false);
         StartCoroutine(ChooseAttack());

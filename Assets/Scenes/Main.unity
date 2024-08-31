@@ -936,6 +936,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2538161278481986140, guid: af0d8a7ffd6e31948a3f5593473f5a0f,
+        type: 3}
+      propertyPath: m_TagString
+      value: TreeBoss
+      objectReference: {fileID: 0}
     - target: {fileID: 2538161278481986141, guid: af0d8a7ffd6e31948a3f5593473f5a0f,
         type: 3}
       propertyPath: m_Radius
@@ -1116,6 +1121,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2538161278481986140, guid: af0d8a7ffd6e31948a3f5593473f5a0f,
+        type: 3}
+      propertyPath: m_TagString
+      value: TreeBoss
       objectReference: {fileID: 0}
     - target: {fileID: 2538161278481986141, guid: af0d8a7ffd6e31948a3f5593473f5a0f,
         type: 3}
@@ -1383,6 +1393,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2538161278481986140, guid: af0d8a7ffd6e31948a3f5593473f5a0f,
+        type: 3}
+      propertyPath: m_TagString
+      value: TreeBoss
       objectReference: {fileID: 0}
     - target: {fileID: 2538161278481986141, guid: af0d8a7ffd6e31948a3f5593473f5a0f,
         type: 3}
@@ -3180,6 +3195,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2538161278481986140, guid: af0d8a7ffd6e31948a3f5593473f5a0f,
+        type: 3}
+      propertyPath: m_TagString
+      value: TreeBoss
       objectReference: {fileID: 0}
     - target: {fileID: 2538161278481986141, guid: af0d8a7ffd6e31948a3f5593473f5a0f,
         type: 3}
@@ -31458,6 +31478,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1567030481}
   - component: {fileID: 1567030482}
+  - component: {fileID: 1567030483}
   m_Layer: 0
   m_Name: Trent
   m_TagString: Untagged
@@ -31509,6 +31530,28 @@ MonoBehaviour:
   - {fileID: 200449174}
   - {fileID: 630973483}
   LastAttack: 0
+  TreeCount: 0
+--- !u!50 &1567030483
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567030480}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &1568629323
 GameObject:
   m_ObjectHideFlags: 0
@@ -35536,6 +35579,7 @@ GameObject:
   - component: {fileID: 4222659409929281430}
   - component: {fileID: 4222659409929281417}
   - component: {fileID: 4222659409929281436}
+  - component: {fileID: 4222659409929281437}
   - component: {fileID: 4222659409929281434}
   - component: {fileID: 4222659409929281431}
   - component: {fileID: 4222659409929281433}
@@ -35704,7 +35748,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AxeImg: {fileID: 1752324363}
-  TreeCount: 0
+--- !u!114 &4222659409929281437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4222659409929281416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a324aa053e080b94dbe762974f9f84da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player_hp: 1
 --- !u!212 &4222659410247214100
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Tree
   - Trunk
+  - TreeBoss
   layers:
   - Default
   - TransparentFX

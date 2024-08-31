@@ -8,14 +8,14 @@ public class TreeCutter : MonoBehaviour
     bool TreeNear = false;
     GameObject TreeNearObj = null;
     [SerializeField] GameObject AxeImg;
-    public int TreeCount;
+    
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    public static event Action<int> OnTreeCut;
+    public static event Action OnTreeCut;
 
 
     public void TreeCutting()
@@ -25,9 +25,9 @@ public class TreeCutter : MonoBehaviour
             if (TreeNearObj != null)
             {
                 Debug.Log("Tree deleted");
-                Destroy(TreeNearObj);
-                TreeCount++;
-                OnTreeCut?.Invoke(TreeCount);
+                TreeNearObj.SetActive(false);
+                
+                OnTreeCut?.Invoke();
                 
             }
 
@@ -36,7 +36,7 @@ public class TreeCutter : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other)
     {
         Debug.Log("trigger");
-        if (other.gameObject.CompareTag("Tree"))
+        if (other.gameObject.CompareTag("TreeBoss"))
         {
             AxeImg.SetActive(true);
             Debug.Log("tree");
@@ -48,7 +48,7 @@ public class TreeCutter : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (TreeNear && other.gameObject.CompareTag("Tree"))
+        if (TreeNear && other.gameObject.CompareTag("TreeBoss"))
         {
             AxeImg.SetActive(false);
             Debug.Log("no tree");
