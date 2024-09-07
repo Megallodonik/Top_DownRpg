@@ -9,13 +9,13 @@ public class Boss : MonoBehaviour
 {
    
 
-    public static event Action<int> ChangePlayerHp;
+    public static event Action<int> ChangePlayerHpBoss;
 
     // Start is called before the first frame update
     
     protected void HitPlayer(int dmg)
     {
-        ChangePlayerHp?.Invoke(dmg);
+        ChangePlayerHpBoss?.Invoke(dmg);
     }
     // Update is called once per frame
     void Update()

@@ -12,7 +12,8 @@ public class PlayerHP : MonoBehaviour
     // Start is called before the first frame update
     private void OnEnable()
     {
-        Boss.ChangePlayerHp += playerHP_update;
+        Boss.ChangePlayerHpBoss += playerHP_update;
+        Obstacle.ChangePlayerHpObstacle += playerHP_update;
     }
     private void playerHP_update(int hpChange)
     {

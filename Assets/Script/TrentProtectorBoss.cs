@@ -14,11 +14,13 @@ public class TrentProtectorBoss : Boss
     [SerializeField] float radiusAroundPlayer = 3f;
     [SerializeField] float speedAroundPlayer = 15f;
     [SerializeField] List<GameObject> TreeList = new List<GameObject>();
+    [SerializeField] GameObject GreenSpike;
     float positionX, positionY, angle = 0f;
     public Attacks LastAttack;
     private Rigidbody2D rb;
     private float moveSpeed = 15f;
     public int TreeCount;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -72,7 +74,7 @@ public class TrentProtectorBoss : Boss
     //}
     private void CircleAttack()
     {
-        LaserCircle.SetActive(true);
+        
         StartCoroutine(LaserCircleRotation());
     }
 
@@ -88,7 +90,7 @@ public class TrentProtectorBoss : Boss
 
     private IEnumerator SquareAttackCor()
     {
-        HitPlayer(-1);
+        
         TreeCount = 0;
         for (int i = 0; i < TreeList.Count; i++)
         {
@@ -104,6 +106,8 @@ public class TrentProtectorBoss : Boss
         // босс вращается вокруг игрока
         for (int i = 0; i < 360; i++)
         {
+            var position = new Vector3(UnityEngine.Random.Range(-8f, 8f), UnityEngine.Random.Range(-4.5f, 4.5f), 0);
+            Instantiate(GreenSpike, position, Quaternion.identity);
             Transform center = player.transform;
 
             positionX = center.position.x + Mathf.Cos(angle) * radiusAroundPlayer;
@@ -136,6 +140,7 @@ public class TrentProtectorBoss : Boss
 
     private IEnumerator LaserCircleRotation()
     {
+        LaserCircle.SetActive(true);
         // вокруг босса вращается спрайт с лазером
         for (int i = 0; i < 180; i++)
         {

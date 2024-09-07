@@ -31529,6 +31529,8 @@ MonoBehaviour:
   - {fileID: 187794462}
   - {fileID: 200449174}
   - {fileID: 630973483}
+  GreenSpike: {fileID: 7276721922627295773, guid: 62f651ece272ca14fb35af3419009566,
+    type: 3}
   LastAttack: 0
   TreeCount: 0
 --- !u!50 &1567030483
@@ -33633,6 +33635,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1828462193}
   - component: {fileID: 1828462192}
+  - component: {fileID: 1828462194}
+  - component: {fileID: 1828462195}
   m_Layer: 0
   m_Name: pngtree-round-red-laser-red-light-halo-ray-png-image_14078285
   m_TagString: Untagged
@@ -33707,6 +33711,85 @@ Transform:
   m_Father: {fileID: 1567030481}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &1828462194
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828462191}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 3.1648881, y: -4.852173}
+  - {x: 4.262231, y: -3.9631715}
+  - {x: 5.39386, y: -2.1623216}
+  - {x: 5.781253, y: -0.7678358}
+  - {x: 5.7660933, y: 0.3265754}
+  - {x: 5.43942, y: 2.1154008}
+  - {x: 4.5709257, y: 3.6655874}
+  - {x: 3.5813036, y: 4.698956}
+  - {x: 2.0194256, y: 5.644238}
+  - {x: 0.8277355, y: 5.947211}
+  - {x: -0.7662572, y: 5.993259}
+  - {x: -2.4777792, y: 5.46472}
+  - {x: -4.2666335, y: 4.1112924}
+  - {x: -5.2706127, y: 2.6298215}
+  - {x: -5.794955, y: 0.88152957}
+  - {x: -5.813641, y: -1.0203094}
+  - {x: -5.409601, y: -2.272502}
+  - {x: -4.4517264, y: -3.7384622}
+  - {x: -3.3849277, y: -4.767184}
+  - {x: -1.9331888, y: -5.39654}
+  - {x: -0.85498023, y: -5.6591306}
+  - {x: 0.6331962, y: -5.701662}
+  - {x: 2.043172, y: -5.4106617}
+  - {x: 3.1632583, y: -4.8498044}
+  - {x: 2.9499335, y: -4.5115066}
+  - {x: 1.5240755, y: -5.1609507}
+  - {x: 0.23289949, y: -5.3350186}
+  - {x: -1.6477591, y: -5.1338096}
+  - {x: -3.0546162, y: -4.526153}
+  - {x: -4.411481, y: -3.1873326}
+  - {x: -5.101576, y: -1.8214579}
+  - {x: -5.376629, y: -0.8433433}
+  - {x: -5.377124, y: 0.5662405}
+  - {x: -5.0191426, y: 1.9987257}
+  - {x: -4.1069055, y: 3.488767}
+  - {x: -2.5427244, y: 4.7801514}
+  - {x: -0.90674603, y: 5.3726125}
+  - {x: 0.7277038, y: 5.377646}
+  - {x: 1.5517254, y: 5.1829658}
+  - {x: 3.1331334, y: 4.3675094}
+  - {x: 4.0358167, y: 3.5925765}
+  - {x: 4.8267975, y: 2.315162}
+  - {x: 5.2325554, y: 1.3356863}
+  - {x: 5.3857307, y: -0.10997004}
+  - {x: 5.347531, y: -0.9064615}
+  - {x: 5.0171585, y: -2.0764146}
+  - {x: 2.9498827, y: -4.509739}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
+--- !u!114 &1828462195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828462191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b8e806749dd83d4d825f2043319a17b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1833469670
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35586,7 +35669,7 @@ GameObject:
   - component: {fileID: 4222659409929281435}
   m_Layer: 0
   m_Name: Player 0
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
