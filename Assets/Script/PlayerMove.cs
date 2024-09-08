@@ -5,6 +5,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] Joystick joystick;
     [SerializeField] float speed = 5;
     [SerializeField] SpriteRenderer spriteRenderer;
+
     Rigidbody2D rb;
     Vector2 direction;
     Animator anim;
@@ -24,9 +25,10 @@ public class PlayerMove : MonoBehaviour
     }
     void FixedUpdate()
     {
-        
+        Debug.Log(direction);
         rb.MovePosition(rb.position + speed * direction * Time.deltaTime);
-        if(direction.x < 0)
+
+        if (direction.x < 0)
         {
             spriteRenderer.flipX = true;
         }

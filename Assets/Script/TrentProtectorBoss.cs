@@ -101,13 +101,24 @@ public class TrentProtectorBoss : Boss
 
     }
 
+    private IEnumerator GreenSpikeSpawn()
+    {
+        for (int i = 0; i < 30; i++)
+        {
+            var position = new Vector3(UnityEngine.Random.Range(-12f, 12f), UnityEngine.Random.Range(-7f, 7f), 0);
+            Instantiate(GreenSpike, position, Quaternion.identity);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+
     private IEnumerator AroundPlayerAttackCor()
     {
+        StartCoroutine(GreenSpikeSpawn());
         // босс вращается вокруг игрока
         for (int i = 0; i < 360; i++)
         {
-            var position = new Vector3(UnityEngine.Random.Range(-8f, 8f), UnityEngine.Random.Range(-4.5f, 4.5f), 0);
-            Instantiate(GreenSpike, position, Quaternion.identity);
+            
             Transform center = player.transform;
 
             positionX = center.position.x + Mathf.Cos(angle) * radiusAroundPlayer;
