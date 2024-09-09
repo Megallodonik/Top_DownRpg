@@ -26,7 +26,9 @@ public class TrentProtectorBoss : Boss
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        StartCoroutine(ChooseAttack());
+        //StartCoroutine(ChooseAttack());
+        Debug.Log("circleAttack");
+        CircleAttack();
     }
 
     // Update is called once per frame
@@ -191,6 +193,7 @@ public class TrentProtectorBoss : Boss
     {
         int AttacksCount = Enum.GetNames(typeof(Attacks)).Length;
         int rnd = UnityEngine.Random.Range(0, AttacksCount);
+
         switch ((Attacks)rnd)
         {
             case Attacks.CircleAttack:
