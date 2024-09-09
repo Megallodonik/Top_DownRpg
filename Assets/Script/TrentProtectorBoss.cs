@@ -14,6 +14,7 @@ public class TrentProtectorBoss : Boss
     [SerializeField] float radiusAroundPlayer = 3f;
     [SerializeField] float speedAroundPlayer = 15f;
     [SerializeField] List<GameObject> TreeList = new List<GameObject>();
+    [SerializeField] List<GameObject> LaserList = new List<GameObject>();
     [SerializeField] GameObject GreenSpike;
     float positionX, positionY, angle = 0f;
     public Attacks LastAttack;
@@ -148,12 +149,33 @@ public class TrentProtectorBoss : Boss
         StartCoroutine(ChooseAttack());
     }
 
+    private IEnumerator LaserSpawn()
+    {
+        for (int i = 0; i < LaserList.Count; i++)
+        {
+            LaserList[i].gameObject.SetActive(true);
 
+            
+            yield return new WaitForSeconds(1f);
+        }
+        StartCoroutine(LaserDeSpawn());
+    }
+    private IEnumerator LaserDeSpawn()
+    {
+        for (int i = 0; i < LaserList.Count; i++)
+        {
+            LaserList[i].gameObject.SetActive(false);
+
+
+            yield return new WaitForSeconds(1f);
+        }
+    }
     private IEnumerator LaserCircleRotation()
     {
+        StartCoroutine(LaserSpawn());
         LaserCircle.SetActive(true);
         // вокруг босса вращается спрайт с лазером
-        for (int i = 0; i < 180; i++)
+        for (int i = 0; i < 90; i++)
         {
             Debug.Log("laserCircleRot coroutine");
             LaserCircle.transform.rotation *= Quaternion.Euler(0f, 0f, 10f);
