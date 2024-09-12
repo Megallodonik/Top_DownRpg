@@ -7,6 +7,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class TrentProtectorBoss : Boss
 {
+
     [SerializeField] Transform player;
     [SerializeField] GameObject Tree;
     //[SerializeField] float radius = 15;
@@ -16,14 +17,16 @@ public class TrentProtectorBoss : Boss
     [SerializeField] List<GameObject> TreeList = new List<GameObject>();
     [SerializeField] List<GameObject> LaserList = new List<GameObject>();
     [SerializeField] List<GameObject> DottedLaserList = new List<GameObject>();
+    [SerializeField] List<GameObject> BossHPList = new List<GameObject>();
     [SerializeField] GameObject GreenSpike;
     float positionX, positionY, angle = 0f;
+    public int BossHP = 12;
     public Attacks LastAttack;
     private Rigidbody2D rb;
     private float moveSpeed = 15f;
     public int TreeCount;
-    
-    // Start is called before the first frame update
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -41,6 +44,7 @@ public class TrentProtectorBoss : Boss
     private void OnEnable()
     {
         TreeCutter.OnTreeCut += TreeCutter_OnTreeCut;
+        
        
     }
 
@@ -50,16 +54,32 @@ public class TrentProtectorBoss : Boss
         TreeCutter.OnTreeCut -= TreeCutter_OnTreeCut;
         
     }
-
+    private void BossHPChange(int HpChange)
+    {
+        BossHP += HpChange;
+        for (int i = 0; i < BossHPList.Count; i--)
+        {
+            i = BossHP;
+            BossHPList[i].gameObject.SetActive(false);
+        }
+        if (BossHP <= 0)
+        {
+            StopAllCoroutines();
+        }
+    }
     private void TreeCutter_OnTreeCut()
     {
-       
+
+        BossHPChange(-1);
+
         TreeCount++;
         if (TreeCount >= 4)
         {
             StartCoroutine(ChooseAttack());
-            
+
         }
+        
+
     }
 
     public enum Attacks
