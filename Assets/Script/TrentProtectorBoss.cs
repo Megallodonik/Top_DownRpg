@@ -9,7 +9,7 @@ public class TrentProtectorBoss : Boss
 {
 
     [SerializeField] Transform player;
-    [SerializeField] GameObject Tree;
+
     //[SerializeField] float radius = 15;
     [SerializeField] GameObject LaserCircle;
     [SerializeField] float radiusAroundPlayer = 3f;
@@ -30,9 +30,9 @@ public class TrentProtectorBoss : Boss
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        //StartCoroutine(ChooseAttack());
-        Debug.Log("circleAttack");
-        CircleAttack();
+        StartCoroutine(ChooseAttack());
+        //Debug.Log("circleAttack");
+        //CircleAttack();
     }
 
     // Update is called once per frame
@@ -57,11 +57,10 @@ public class TrentProtectorBoss : Boss
     private void BossHPChange(int HpChange)
     {
         BossHP += HpChange;
-        for (int i = 0; i < BossHPList.Count; i--)
-        {
-            i = BossHP;
-            BossHPList[i].gameObject.SetActive(false);
-        }
+
+        
+        BossHPList[BossHP].gameObject.SetActive(false);
+
         if (BossHP <= 0)
         {
             StopAllCoroutines();
@@ -127,7 +126,7 @@ public class TrentProtectorBoss : Boss
 
     private IEnumerator GreenSpikeSpawn()
     {
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 60; i++)
         {
             var position = new Vector3(UnityEngine.Random.Range(-12f, 12f), UnityEngine.Random.Range(-7f, 7f), 0);
             Instantiate(GreenSpike, position, Quaternion.identity);
@@ -201,11 +200,11 @@ public class TrentProtectorBoss : Boss
         StartCoroutine(LaserSpawn());
         LaserCircle.SetActive(true);
         // вокруг босса вращается спрайт с лазером
-        for (int i = 0; i < 120; i++)
+        for (int i = 0; i < 1200; i++)
         {
             Debug.Log("laserCircleRot coroutine");
             LaserCircle.transform.rotation *= Quaternion.Euler(0f, 0f, 10f);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.01f);
             
         }
         LaserCircle.SetActive(false);
