@@ -368,11 +368,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1567030481}
     m_Modifications:
-    - target: {fileID: 1488212255930570020, guid: af0d8a7ffd6e31948a3f5593473f5a0f,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2538161278481986138, guid: af0d8a7ffd6e31948a3f5593473f5a0f,
         type: 3}
       propertyPath: m_RootOrder
@@ -452,11 +447,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2538161278481986140, guid: af0d8a7ffd6e31948a3f5593473f5a0f,
-        type: 3}
-      propertyPath: m_TagString
-      value: TreeBoss
       objectReference: {fileID: 0}
     - target: {fileID: 2538161278481986141, guid: af0d8a7ffd6e31948a3f5593473f5a0f,
         type: 3}
@@ -1262,7 +1252,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4222659409929281430}
-  Tree: {fileID: 2055102311959635369, guid: 9fb66d8c9d3b5194a82e9eed65a54afb, type: 3}
   LaserCircle: {fileID: 1828462191}
   radiusAroundPlayer: 3
   speedAroundPlayer: 15

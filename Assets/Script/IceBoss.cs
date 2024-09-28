@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static IceBoss;
 using static UnityEngine.GraphicsBuffer;
@@ -15,6 +16,7 @@ public class IceBoss : Boss
     [SerializeField] float speedAroundPlayer = 15f;
     [SerializeField] List<GameObject> TreeList = new List<GameObject>();
     [SerializeField] List<GameObject> BossHPList = new List<GameObject>();
+    [SerializeField] List<GameObject> IceSpikesList = new List<GameObject>();
     [SerializeField] List<Vector3> DashPoints = new List<Vector3>();
     float positionX, positionY, angle = 0f;
     public int BossHP = 12;
@@ -30,7 +32,9 @@ public class IceBoss : Boss
         //StartCoroutine(ChooseAttack());
         //Debug.Log("dashAttack");
         //Invoke("DashAttack", 5f);
-        Invoke("ChoosingAttack", 5f);
+        Invoke("IceSpikesAttack", 2f);
+        
+        //Invoke("ChoosingAttack", 5f);
     }
     private void ChoosingAttack()
     {
@@ -102,9 +106,10 @@ public class IceBoss : Boss
         
     }
 
-    private void AroundPlayerAttack()
+    private void IceSpikesAttack()
     {
-        StartCoroutine(AroundPlayerAttackCor());
+
+        StartCoroutine(IceSpikesAttackCor());
     }
 
     private void SquareAttack()
@@ -125,6 +130,12 @@ public class IceBoss : Boss
                 transform.position = Vector3.MoveTowards(transform.position, DashPoints[rnd], step);
                 yield return new WaitForSeconds(0.01f);
             }
+        }
+        while (transform.position != new Vector3(0, 0, 0))
+        {
+            float step = moveSpeed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, 0), step);
+            yield return new WaitForSeconds(0.01f);
         }
         StartCoroutine(ChooseAttack());
     }
@@ -150,9 +161,17 @@ public class IceBoss : Boss
         }
     }
 
-    private IEnumerator AroundPlayerAttackCor()
+    private IEnumerator IceSpikesAttackCor()
     {
-        yield return null;
+        for (int i = 0; i < IceSpikesList.Count; i++)
+        {
+            IceSpikesList[i].gameObject.SetActive(true);
+
+            yield return new WaitForSeconds(0.5f);
+
+
+
+        }
         StartCoroutine(ChooseAttack());
     }
 
@@ -205,8 +224,7 @@ public class IceBoss : Boss
                 {
 
                     LastAttack = Attacks.AroundPlayerAttack;
-                    Debug.Log("around");
-                    StartCoroutine(ChooseAttack());
+                    IceSpikesAttack();
                     yield return null;
                     break;
                 }

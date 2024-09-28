@@ -16,7 +16,7 @@ public class GreenSpike : Obstacle
     private void Start()
     {
         Collider = GetComponent<Collider2D>();
-        Invoke("EnableCollider", 2.0f);
+        Invoke("EnableCollider", 0.7f);
         rb = GetComponent<Rigidbody2D>();
         direction = new Vector2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f));
     }
