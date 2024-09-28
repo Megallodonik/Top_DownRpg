@@ -17,6 +17,7 @@ public class IceBoss : Boss
     [SerializeField] List<GameObject> TreeList = new List<GameObject>();
     [SerializeField] List<GameObject> BossHPList = new List<GameObject>();
     [SerializeField] List<GameObject> IceSpikesList = new List<GameObject>();
+    [SerializeField] List<GameObject> DottedLaserList = new List<GameObject>();
     [SerializeField] List<Vector3> DashPoints = new List<Vector3>();
     float positionX, positionY, angle = 0f;
     public int BossHP = 12;
@@ -32,9 +33,9 @@ public class IceBoss : Boss
         //StartCoroutine(ChooseAttack());
         //Debug.Log("dashAttack");
         //Invoke("DashAttack", 5f);
-        Invoke("IceSpikesAttack", 2f);
-        
-        //Invoke("ChoosingAttack", 5f);
+        //Invoke("IceSpikesAttack", 2f);
+
+        Invoke("ChoosingAttack", 5f);
     }
     private void ChoosingAttack()
     {
@@ -165,6 +166,9 @@ public class IceBoss : Boss
     {
         for (int i = 0; i < IceSpikesList.Count; i++)
         {
+            DottedLaserList[i].gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            DottedLaserList[i].gameObject.SetActive(false);
             IceSpikesList[i].gameObject.SetActive(true);
 
             yield return new WaitForSeconds(0.5f);

@@ -16,6 +16,13 @@ public class IceSpike : Obstacle
     {
         
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            HitPlayer(-1);
+        }
+    }
     private IEnumerator fly()
     {
         if (transform.position.x > 0)
@@ -28,6 +35,8 @@ public class IceSpike : Obstacle
                 transform.position = Vector3.MoveTowards(transform.position, new Vector3(startPos - 30, transform.position.y), step);
                 yield return new WaitForSeconds(0.01f);
             }
+            transform.position = new Vector3(startPos, transform.position.y);
+            this.gameObject.SetActive(false);
         }
         else
         {
@@ -39,6 +48,8 @@ public class IceSpike : Obstacle
                 transform.position = Vector3.MoveTowards(transform.position, new Vector3(startPos + 30, transform.position.y), step);
                 yield return new WaitForSeconds(0.01f);
             }
+            transform.position = new Vector3(startPos, transform.position.y);
+            this.gameObject.SetActive(false);
         }
 
     }

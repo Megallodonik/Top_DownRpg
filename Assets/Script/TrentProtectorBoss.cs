@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static TrentProtectorBoss;
 using static UnityEngine.GraphicsBuffer;
 
@@ -18,6 +19,7 @@ public class TrentProtectorBoss : Boss
     [SerializeField] List<GameObject> LaserList = new List<GameObject>();
     [SerializeField] List<GameObject> DottedLaserList = new List<GameObject>();
     [SerializeField] List<GameObject> BossHPList = new List<GameObject>();
+    [SerializeField] List<GameObject> GreenSpikeList = new List<GameObject>();
     [SerializeField] GameObject GreenSpike;
     float positionX, positionY, angle = 0f;
     public int BossHP = 12;
@@ -29,6 +31,14 @@ public class TrentProtectorBoss : Boss
 
     void Start()
     {
+        for (int i = 0; i < 60; i++)
+        {
+            var position = new Vector3(UnityEngine.Random.Range(-12f, 12f), UnityEngine.Random.Range(-7f, 7f), 0);
+
+            GameObject temp = Instantiate(GreenSpike, position, Quaternion.identity);
+            temp.SetActive(false);
+            GreenSpikeList.Add(temp);
+        }
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(ChooseAttack());
         //Debug.Log("circleAttack");
@@ -64,7 +74,14 @@ public class TrentProtectorBoss : Boss
         if (BossHP <= 0)
         {
             StopAllCoroutines();
+            StartCoroutine(nextBoss());
         }
+    }
+    private IEnumerator nextBoss()
+    {
+        yield return new WaitForSeconds(10f);
+        SceneManager.LoadScene("SecondBoss");
+        
     }
     private void TreeCutter_OnTreeCut()
     {
@@ -126,10 +143,9 @@ public class TrentProtectorBoss : Boss
 
     private IEnumerator GreenSpikeSpawn()
     {
-        for (int i = 0; i < 60; i++)
+        for (int i = 0; i < GreenSpikeList.Count; i++)
         {
-            var position = new Vector3(UnityEngine.Random.Range(-12f, 12f), UnityEngine.Random.Range(-7f, 7f), 0);
-            Instantiate(GreenSpike, position, Quaternion.identity);
+            GreenSpikeList[i].gameObject.SetActive(true);
             yield return new WaitForSeconds(0.1f);
         }
     }
