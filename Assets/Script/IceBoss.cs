@@ -9,7 +9,7 @@ using static UnityEngine.GraphicsBuffer;
 public class IceBoss : Boss
 {
 
-    [SerializeField] Transform player;
+    
 
     //[SerializeField] float radius = 15;
     [SerializeField] float radiusAroundPlayer = 3f;
@@ -19,6 +19,7 @@ public class IceBoss : Boss
     [SerializeField] List<GameObject> IceSpikesList = new List<GameObject>();
     [SerializeField] List<GameObject> DottedLaserList = new List<GameObject>();
     [SerializeField] List<Vector3> DashPoints = new List<Vector3>();
+    [SerializeField] GameObject Player;
     float positionX, positionY, angle = 0f;
     public int BossHP = 12;
     private Attacks LastAttack;
@@ -129,6 +130,16 @@ public class IceBoss : Boss
                 transform.rotation *= Quaternion.Euler(0f, 0f, 10f);
                 float step = moveSpeed * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, DashPoints[rnd], step);
+                
+                yield return new WaitForSeconds(0.01f);
+            }
+            Vector3 playerPos = Player.transform.position;
+            while (transform.position != playerPos)
+            {
+                transform.rotation *= Quaternion.Euler(0f, 0f, 10f);
+                float step = moveSpeed/2 * Time.deltaTime;
+                transform.position = Vector3.MoveTowards(transform.position, playerPos, step);
+
                 yield return new WaitForSeconds(0.01f);
             }
         }
@@ -186,6 +197,7 @@ public class IceBoss : Boss
 
     private IEnumerator ChooseAttack()
     {
+        yield return new WaitForSeconds(2f);
         int AttacksCount = Enum.GetNames(typeof(Attacks)).Length;
         int rnd = UnityEngine.Random.Range(0, AttacksCount);
 

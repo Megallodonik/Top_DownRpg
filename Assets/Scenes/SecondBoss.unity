@@ -123,6 +123,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &221465687 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1785487515742945070, guid: 843add3ce4543f744be63268354d140b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1565706249}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &230501490
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,7 +176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edb56b1cdacaa4a42b169fd19e1e7a3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1565706250}
   radiusAroundPlayer: 3
   speedAroundPlayer: 15
   TreeList:
@@ -220,6 +225,7 @@ MonoBehaviour:
   - {x: -6, y: 5, z: 0}
   - {x: 7, y: 4, z: 0}
   - {x: 10, y: -6, z: 0}
+  Player: {fileID: 221465687}
   BossHP: 12
   TreeCount: 0
 --- !u!50 &230501493
@@ -3021,7 +3027,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1565706249}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 221465687}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e38ee6f1d132c8441b388f9f338368a5, type: 3}
