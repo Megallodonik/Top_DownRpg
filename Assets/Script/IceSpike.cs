@@ -8,9 +8,12 @@ public class IceSpike : Obstacle
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+    private void OnEnable()
+    {
         StartCoroutine(fly());
     }
-
     // Update is called once per frame
     void Update()
     {

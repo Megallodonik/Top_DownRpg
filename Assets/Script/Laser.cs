@@ -6,6 +6,10 @@ public class Laser : Obstacle
 {
     private void Start()
     {
+        
+    }
+    private void OnEnable()
+    {
         StartCoroutine(ScaleChange());
     }
     private void OnTriggerEnter2D(Collider2D other)

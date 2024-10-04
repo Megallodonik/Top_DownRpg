@@ -25,7 +25,7 @@ public class PlayerMove : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Debug.Log(direction);
+        
         rb.MovePosition(rb.position + speed * direction * Time.deltaTime);
 
         if (direction.x < 0)

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static IceBoss;
 using static UnityEngine.GraphicsBuffer;
 
@@ -21,23 +22,26 @@ public class IceBoss : Boss
     [SerializeField] List<Vector3> DashPoints = new List<Vector3>();
     [SerializeField] GameObject Player;
     [SerializeField] GameObject GreenSpike;
+    LineRenderer lineRenderer;
+
     float positionX, positionY, angle = 0f;
     public int BossHP = 12;
     private Attacks LastAttack;
     private Rigidbody2D rb;
     private float moveSpeed = 150f;
     public int TreeCount;
-
+    private bool greenSpikeSpawn = false;
 
     void Start()
     {
+        lineRenderer = GetComponent<LineRenderer>();
         rb = GetComponent<Rigidbody2D>();
         //StartCoroutine(ChooseAttack());
         //Debug.Log("dashAttack");
-        //Invoke("DashAttack", 5f);
+        Invoke("DashAttack", 2f);
         //Invoke("IceSpikesAttack", 2f);
 
-        Invoke("ChoosingAttack", 5f);
+        //Invoke("ChoosingAttack", 5f);
     }
     private void ChoosingAttack()
     {
@@ -122,7 +126,8 @@ public class IceBoss : Boss
 
     private IEnumerator GreenSpikeSpawn()
     {
-        while (true)
+        Debug.Log("GreenSpikeSpawn");
+        while (greenSpikeSpawn == true)
         {
             Instantiate(GreenSpike, transform.position, transform.rotation);
             yield return new WaitForSeconds(1f);
@@ -130,10 +135,17 @@ public class IceBoss : Boss
     }
     private IEnumerator DashAttackCor_1()
     {
+        Debug.Log("DashAttackCor");
+        greenSpikeSpawn = true;
         StartCoroutine(GreenSpikeSpawn());
         for (int i = 0; i < 15; i++)
         {
             int rnd = UnityEngine.Random.Range(0, DashPoints.Count);
+            Vector3[] positions = { transform.position, DashPoints[rnd] };
+            lineRenderer.positionCount = 2;
+            lineRenderer.SetPositions(positions);
+            yield return new WaitForSeconds(0.5f);
+            lineRenderer.positionCount = 0;
             while (transform.position != DashPoints[rnd])
             {
                 
@@ -146,12 +158,14 @@ public class IceBoss : Boss
             yield return new WaitForSeconds(0.4f);
             while (transform.position != playerPos)
             {
-                
-                float step = moveSpeed/2 * Time.deltaTime;
+                float speed = 50f;
+                float step =  speed * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, playerPos, step);
 
                 yield return new WaitForSeconds(0.01f);
             }
+            greenSpikeSpawn = false;
+            StopCoroutine(GreenSpikeSpawn());
         }
         while (transform.position != new Vector3(0, 0, 0))
         {
@@ -159,12 +173,13 @@ public class IceBoss : Boss
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, 0), step);
             yield return new WaitForSeconds(0.01f);
         }
-        StopCoroutine(GreenSpikeSpawn());
+        
         StartCoroutine(ChooseAttack());
     }
 
     private IEnumerator SquareAttackCor()
     {
+        Debug.Log("SquareAttackCor");
 
         TreeCount = 0;
         for (int i = 0; i < TreeList.Count; i++)
@@ -183,9 +198,22 @@ public class IceBoss : Boss
             HitPlayer(-1);
         }
     }
+    private IEnumerator FollowPlayer()
+    {
+        Debug.Log("FollowPlayerCor");
+        while (transform.position != Player.transform.position)
+        {
+            float speed = 8f;
+            float step = speed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, step);
 
+            yield return new WaitForSeconds(0.01f);
+        }
+    }
     private IEnumerator IceSpikesAttackCor()
     {
+        Debug.Log("IceSpikeAttackCor");
+        StartCoroutine(FollowPlayer());
         for (int i = 0; i < IceSpikesList.Count; i++)
         {
             DottedLaserList[i].gameObject.SetActive(true);
@@ -198,6 +226,14 @@ public class IceBoss : Boss
 
 
         }
+        StopCoroutine(FollowPlayer());
+        while (transform.position != new Vector3(0, 0, 0))
+        {
+            float speed = 25f;
+            float step = speed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, 0), step);
+            yield return new WaitForSeconds(0.01f);
+        }
         StartCoroutine(ChooseAttack());
     }
 
@@ -208,6 +244,7 @@ public class IceBoss : Boss
 
     private IEnumerator ChooseAttack()
     {
+        Debug.Log("Chooseattackcor");
         yield return new WaitForSeconds(2f);
         int AttacksCount = Enum.GetNames(typeof(Attacks)).Length;
         int rnd = UnityEngine.Random.Range(0, AttacksCount);
@@ -217,9 +254,10 @@ public class IceBoss : Boss
             case Attacks.DashAttack:
                 if (LastAttack != Attacks.DashAttack)
                 {
-
+                    Debug.Log("DashAttack");
                     LastAttack = Attacks.DashAttack;
                     DashAttack();
+
                     yield return null;
                     break;
 
@@ -234,7 +272,7 @@ public class IceBoss : Boss
             case Attacks.SquareAttack:
                 if (LastAttack != Attacks.SquareAttack)
                 {
-
+                    Debug.Log("SquareAttack");
                     LastAttack = Attacks.SquareAttack;
                     SquareAttack();
                     yield return null;
@@ -249,7 +287,7 @@ public class IceBoss : Boss
             case Attacks.AroundPlayerAttack:
                 if (LastAttack != Attacks.AroundPlayerAttack)
                 {
-
+                    Debug.Log("AroundAttack");
                     LastAttack = Attacks.AroundPlayerAttack;
                     IceSpikesAttack();
                     yield return null;

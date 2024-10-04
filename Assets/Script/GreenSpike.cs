@@ -15,6 +15,10 @@ public class GreenSpike : Obstacle
 
     private void Start()
     {
+
+    }
+    private void OnEnable()
+    {
         StartCoroutine(timer());
         Collider = GetComponent<Collider2D>();
         Invoke("EnableCollider", 0.7f);
@@ -27,6 +31,8 @@ public class GreenSpike : Obstacle
         var position = new Vector3(UnityEngine.Random.Range(-12f, 12f), UnityEngine.Random.Range(-7f, 7f), 0);
         transform.position = position;
         this.gameObject.SetActive(false);
+        Collider.enabled = false;
+        
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

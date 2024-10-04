@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHP : MonoBehaviour
 {
-    public int Player_hp = 1;
+    public int Player_hp = 100;
 
  
     
