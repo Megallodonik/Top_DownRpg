@@ -20,6 +20,7 @@ public class IceBoss : Boss
     [SerializeField] List<GameObject> DottedLaserList = new List<GameObject>();
     [SerializeField] List<Vector3> DashPoints = new List<Vector3>();
     [SerializeField] GameObject Player;
+    [SerializeField] GameObject GreenSpike;
     float positionX, positionY, angle = 0f;
     public int BossHP = 12;
     private Attacks LastAttack;
@@ -43,9 +44,9 @@ public class IceBoss : Boss
         StartCoroutine(ChooseAttack());
     }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-
+        transform.rotation *= Quaternion.Euler(0f, 0f, 10f);
     }
 
     private void OnEnable()
@@ -119,24 +120,33 @@ public class IceBoss : Boss
         StartCoroutine(SquareAttackCor());
     }
 
-
+    private IEnumerator GreenSpikeSpawn()
+    {
+        while (true)
+        {
+            Instantiate(GreenSpike, transform.position, transform.rotation);
+            yield return new WaitForSeconds(1f);
+        }
+    }
     private IEnumerator DashAttackCor_1()
     {
+        StartCoroutine(GreenSpikeSpawn());
         for (int i = 0; i < 15; i++)
         {
             int rnd = UnityEngine.Random.Range(0, DashPoints.Count);
             while (transform.position != DashPoints[rnd])
             {
-                transform.rotation *= Quaternion.Euler(0f, 0f, 10f);
+                
                 float step = moveSpeed * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, DashPoints[rnd], step);
                 
                 yield return new WaitForSeconds(0.01f);
             }
             Vector3 playerPos = Player.transform.position;
+            yield return new WaitForSeconds(0.4f);
             while (transform.position != playerPos)
             {
-                transform.rotation *= Quaternion.Euler(0f, 0f, 10f);
+                
                 float step = moveSpeed/2 * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, playerPos, step);
 
@@ -149,6 +159,7 @@ public class IceBoss : Boss
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, 0), step);
             yield return new WaitForSeconds(0.01f);
         }
+        StopCoroutine(GreenSpikeSpawn());
         StartCoroutine(ChooseAttack());
     }
 

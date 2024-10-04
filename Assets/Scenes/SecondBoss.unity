@@ -226,6 +226,8 @@ MonoBehaviour:
   - {x: 7, y: 4, z: 0}
   - {x: 10, y: -6, z: 0}
   Player: {fileID: 221465687}
+  GreenSpike: {fileID: 7276721922627295773, guid: 62f651ece272ca14fb35af3419009566,
+    type: 3}
   BossHP: 12
   TreeCount: 0
 --- !u!50 &230501493

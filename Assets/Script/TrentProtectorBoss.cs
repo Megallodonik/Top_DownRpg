@@ -45,10 +45,9 @@ public class TrentProtectorBoss : Boss
         //CircleAttack();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-
+        transform.rotation *= Quaternion.Euler(0f, 0f, 10f);
     }
 
     private void OnEnable()
