@@ -15,6 +15,8 @@ public class RockBoss : Boss
     [SerializeField] GameObject BossHeart;
     [SerializeField] GameObject DottedCircle;
     [SerializeField] GameObject FireHole;
+    [SerializeField] GameObject BlackCube;
+    [SerializeField] GameObject RockBullet;
     LineRenderer lineRenderer;
 
     float positionX, positionY, angle = 0f;
@@ -28,21 +30,22 @@ public class RockBoss : Boss
 
     void Start()
     {
-        for (int i = 0; i < 60; i++)
+        for (int i = 0; i < DottedCircleList.Count; i++)
         {
-            var position = new Vector3(UnityEngine.Random.Range(-12f, 12f), UnityEngine.Random.Range(-7f, 7f), 0);
+            
 
-            GameObject temp = Instantiate(DottedCircle, position, Quaternion.identity);
-            GameObject temp_1 = Instantiate(FireHole, position, Quaternion.identity);
+            
+            GameObject temp = Instantiate(FireHole, DottedCircleList[i].transform.position, Quaternion.identity);
             temp.SetActive(false);
-            temp_1.SetActive(false);
-            DottedCircleList.Add(temp);
-            FireHoleList.Add(temp_1);
+            FireHoleList.Add(temp);
         }
         lineRenderer = GetComponent<LineRenderer>();
         rb = GetComponent<Rigidbody2D>();
-        //StartCoroutine(ChooseAttack());
+        //Invoke("ChoosingAttack", 5f);
         StartCoroutine(SpawnRocksAttackCor());
+        //StartCoroutine(BulletHellAttackCor());
+
+
         StartCoroutine(spawnHearts());
         
     }
@@ -105,22 +108,59 @@ public class RockBoss : Boss
         SpawnRocksAttack = 0,
         BulletHellAttack = 1
     }
+    
 
+    private IEnumerator BulletHellAttackCor()
+    {
+        BlackCube.transform.position = Player.transform.position;
+        BlackCube.SetActive(true);
+        for (int i = 0; i < 40; i++)
+        {
+            Instantiate(RockBullet, transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(0.5f);
+        }
+        BlackCube.SetActive(false);
+        StartCoroutine(ChooseAttack());
+    }
     private IEnumerator SpawnRocksAttackCor()
     {
-        for (int i = 0; i < DottedCircleList.Count; i++)
+        for (int i = 0; i < 2; i++)
         {
-            DottedCircleList[i].gameObject.SetActive(true);
-            yield return new WaitForSeconds(0.1f);
-        }
-        yield return new WaitForSeconds(2f);
-        for (int i = 0; i < DottedCircleList.Count; i++)
-        {
-            DottedCircleList[i].gameObject.SetActive(false);
-            FireHoleList[i].gameObject.SetActive(true);
+            for (int b = 0; b < DottedCircleList.Count; b++)
+            {
+                DottedCircleList[b].gameObject.SetActive(true);
+                yield return new WaitForSeconds(0.1f);
+                DottedCircleList[b].gameObject.SetActive(false);
+            }
+            yield return new WaitForSeconds(2f);
 
+            for (int b = 0; b < DottedCircleList.Count; b++)
+            {
+                DottedCircleList[b].gameObject.SetActive(true);
+
+            }
+            yield return new WaitForSeconds(0.5f);
+
+            for (int b = 0; b < DottedCircleList.Count; b++)
+            {
+
+                DottedCircleList[b].gameObject.SetActive(false);
+
+            }
+            yield return new WaitForSeconds(0.5f);
+            for (int b = 0; b < FireHoleList.Count; b++)
+            {
+                FireHoleList[b].gameObject.SetActive(true);
+
+            }
+            yield return new WaitForSeconds(2f);
+            for (int b = 0; b < FireHoleList.Count; b++)
+            {
+                FireHoleList[b].gameObject.SetActive(false);
+
+            }
         }
-        yield return new WaitForSeconds(0.1f);
+        StartCoroutine(ChooseAttack());
     }
 
     private IEnumerator spawnHearts()
@@ -153,8 +193,8 @@ public class RockBoss : Boss
                 {
                     Debug.Log("DashAttack");
                     LastAttack = Attacks.SpawnRocksAttack;
-                    
 
+                    StartCoroutine(SpawnRocksAttackCor());
                     yield return null;
                     break;
 
@@ -170,7 +210,7 @@ public class RockBoss : Boss
                 {
                     Debug.Log("AroundAttack");
                     LastAttack = Attacks.BulletHellAttack;
-                    
+                    StartCoroutine(BulletHellAttackCor());
                     yield return null;
                     break;
                 }
