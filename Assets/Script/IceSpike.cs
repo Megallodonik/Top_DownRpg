@@ -26,6 +26,7 @@ public class IceSpike : Obstacle
             HitPlayer(-1);
         }
     }
+
     private IEnumerator fly()
     {
         if (transform.position.x > 0)

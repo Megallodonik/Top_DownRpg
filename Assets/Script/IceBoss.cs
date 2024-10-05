@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static IceBoss;
@@ -22,6 +23,7 @@ public class IceBoss : Boss
     [SerializeField] List<Vector3> DashPoints = new List<Vector3>();
     [SerializeField] GameObject Player;
     [SerializeField] GameObject GreenSpike;
+    [SerializeField] GameObject BossHeart;
     LineRenderer lineRenderer;
 
     float positionX, positionY, angle = 0f;
@@ -30,6 +32,8 @@ public class IceBoss : Boss
     private Rigidbody2D rb;
     private float moveSpeed = 150f;
     public int TreeCount;
+    bool rotation = true;
+    bool followPlayer = false;
     private bool greenSpikeSpawn = false;
 
     void Start()
@@ -40,7 +44,7 @@ public class IceBoss : Boss
         //Debug.Log("dashAttack");
         Invoke("DashAttack", 2f);
         //Invoke("IceSpikesAttack", 2f);
-
+        StartCoroutine(spawnHearts());
         //Invoke("ChoosingAttack", 5f);
     }
     private void ChoosingAttack()
@@ -50,7 +54,11 @@ public class IceBoss : Boss
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.rotation *= Quaternion.Euler(0f, 0f, 10f);
+        if (rotation)
+        {
+            transform.rotation *= Quaternion.Euler(0f, 0f, 10f);
+        }
+        
     }
 
     private void OnEnable()
@@ -96,8 +104,7 @@ public class IceBoss : Boss
     public enum Attacks
     {
         DashAttack = 0,
-        SquareAttack = 1,
-        AroundPlayerAttack = 2
+        AroundPlayerAttack = 1
     }
     //private void CircleAttack()
     //{
@@ -119,25 +126,21 @@ public class IceBoss : Boss
         StartCoroutine(IceSpikesAttackCor());
     }
 
-    private void SquareAttack()
+ 
+    private IEnumerator spawnHearts()
     {
-        StartCoroutine(SquareAttackCor());
+        var position = new Vector3(UnityEngine.Random.Range(-12f, 12f), UnityEngine.Random.Range(-7f, 7f), 0);
+
+        Instantiate(BossHeart, position, Quaternion.identity);
+
+        yield return new WaitForSeconds(5f);
+        StartCoroutine(spawnHearts());
     }
 
-    private IEnumerator GreenSpikeSpawn()
-    {
-        Debug.Log("GreenSpikeSpawn");
-        while (greenSpikeSpawn == true)
-        {
-            Instantiate(GreenSpike, transform.position, transform.rotation);
-            yield return new WaitForSeconds(1f);
-        }
-    }
     private IEnumerator DashAttackCor_1()
     {
         Debug.Log("DashAttackCor");
-        greenSpikeSpawn = true;
-        StartCoroutine(GreenSpikeSpawn());
+
         for (int i = 0; i < 15; i++)
         {
             int rnd = UnityEngine.Random.Range(0, DashPoints.Count);
@@ -154,18 +157,23 @@ public class IceBoss : Boss
                 
                 yield return new WaitForSeconds(0.01f);
             }
-            Vector3 playerPos = Player.transform.position;
-            yield return new WaitForSeconds(0.4f);
-            while (transform.position != playerPos)
+            
+            Vector3 pos = Player.transform.position;
+            Vector3[] positions_2 = { transform.position, pos };
+            lineRenderer.positionCount = 2;
+            lineRenderer.SetPositions(positions_2);
+            yield return new WaitForSeconds(0.1f);
+            lineRenderer.positionCount = 0;
+            while (transform.position != pos)
             {
-                float speed = 50f;
-                float step =  speed * Time.deltaTime;
-                transform.position = Vector3.MoveTowards(transform.position, playerPos, step);
+
+                float step = moveSpeed * Time.deltaTime;
+                transform.position = Vector3.MoveTowards(transform.position, pos, step);
 
                 yield return new WaitForSeconds(0.01f);
             }
-            greenSpikeSpawn = false;
-            StopCoroutine(GreenSpikeSpawn());
+
+
         }
         while (transform.position != new Vector3(0, 0, 0))
         {
@@ -177,19 +185,19 @@ public class IceBoss : Boss
         StartCoroutine(ChooseAttack());
     }
 
-    private IEnumerator SquareAttackCor()
-    {
-        Debug.Log("SquareAttackCor");
+    //private IEnumerator SquareAttackCor()
+    //{
+    //    Debug.Log("SquareAttackCor");
 
-        TreeCount = 0;
-        for (int i = 0; i < TreeList.Count; i++)
-        {
-            TreeList[i].gameObject.SetActive(true);
-            yield return new WaitForSeconds(1f);
-        }
+    //    TreeCount = 0;
+    //    for (int i = 0; i < TreeList.Count; i++)
+    //    {
+    //        TreeList[i].gameObject.SetActive(true);
+    //        yield return new WaitForSeconds(1f);
+    //    }
 
 
-    }
+    //}
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -198,22 +206,11 @@ public class IceBoss : Boss
             HitPlayer(-1);
         }
     }
-    private IEnumerator FollowPlayer()
-    {
-        Debug.Log("FollowPlayerCor");
-        while (transform.position != Player.transform.position)
-        {
-            float speed = 8f;
-            float step = speed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, step);
 
-            yield return new WaitForSeconds(0.01f);
-        }
-    }
     private IEnumerator IceSpikesAttackCor()
     {
         Debug.Log("IceSpikeAttackCor");
-        StartCoroutine(FollowPlayer());
+
         for (int i = 0; i < IceSpikesList.Count; i++)
         {
             DottedLaserList[i].gameObject.SetActive(true);
@@ -226,7 +223,7 @@ public class IceBoss : Boss
 
 
         }
-        StopCoroutine(FollowPlayer());
+
         while (transform.position != new Vector3(0, 0, 0))
         {
             float speed = 25f;
@@ -244,6 +241,8 @@ public class IceBoss : Boss
 
     private IEnumerator ChooseAttack()
     {
+        StopCoroutine(DashAttackCor_1());
+        StopCoroutine(IceSpikesAttackCor());
         Debug.Log("Chooseattackcor");
         yield return new WaitForSeconds(2f);
         int AttacksCount = Enum.GetNames(typeof(Attacks)).Length;
@@ -261,22 +260,6 @@ public class IceBoss : Boss
                     yield return null;
                     break;
 
-                }
-                else
-                {
-                    StartCoroutine(ChooseAttack());
-                    yield return null;
-                    break;
-                }
-
-            case Attacks.SquareAttack:
-                if (LastAttack != Attacks.SquareAttack)
-                {
-                    Debug.Log("SquareAttack");
-                    LastAttack = Attacks.SquareAttack;
-                    SquareAttack();
-                    yield return null;
-                    break;
                 }
                 else
                 {

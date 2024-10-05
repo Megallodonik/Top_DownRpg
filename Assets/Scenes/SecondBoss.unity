@@ -229,6 +229,8 @@ MonoBehaviour:
   Player: {fileID: 221465687}
   GreenSpike: {fileID: 7276721922627295773, guid: 62f651ece272ca14fb35af3419009566,
     type: 3}
+  BossHeart: {fileID: 2538161278481986140, guid: af0d8a7ffd6e31948a3f5593473f5a0f,
+    type: 3}
   BossHP: 12
   TreeCount: 0
 --- !u!50 &230501493
