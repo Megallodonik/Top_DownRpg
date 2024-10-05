@@ -42,10 +42,10 @@ public class IceBoss : Boss
         rb = GetComponent<Rigidbody2D>();
         //StartCoroutine(ChooseAttack());
         //Debug.Log("dashAttack");
-        Invoke("DashAttack", 2f);
+        //Invoke("DashAttack", 2f);
         //Invoke("IceSpikesAttack", 2f);
         StartCoroutine(spawnHearts());
-        //Invoke("ChoosingAttack", 5f);
+        Invoke("ChoosingAttack", 5f);
     }
     private void ChoosingAttack()
     {
