@@ -1862,6 +1862,101 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 542870808}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &561283178
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.92387956
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.38268343
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871604, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_Name
+      value: TurretRock (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871604, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc43191a23697164ab8d273ae9529d87, type: 3}
+--- !u!1 &561283179 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8435962509250871604, guid: cc43191a23697164ab8d273ae9529d87,
+    type: 3}
+  m_PrefabInstance: {fileID: 561283178}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &561283184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561283179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ec5d2f9e6a3f8a488270d9a78547ba5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RockBullet: {fileID: 8517625352372101681, guid: 991fe60e24019704a96b761a831bbbbe,
+    type: 3}
+  RockBoss: {fileID: 1749173458}
 --- !u!1001 &611631502
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2126,6 +2221,101 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 694776718}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &742701037
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.38268343
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.92387956
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 135
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871604, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_Name
+      value: TurretRock (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871604, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc43191a23697164ab8d273ae9529d87, type: 3}
+--- !u!1 &742701038 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8435962509250871604, guid: cc43191a23697164ab8d273ae9529d87,
+    type: 3}
+  m_PrefabInstance: {fileID: 742701037}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &742701044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742701038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ec5d2f9e6a3f8a488270d9a78547ba5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RockBullet: {fileID: 8517625352372101681, guid: 991fe60e24019704a96b761a831bbbbe,
+    type: 3}
+  RockBoss: {fileID: 1749173458}
 --- !u!1001 &783862894
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2562,6 +2752,101 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 882336900}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &914798131
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.92387956
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.38268343
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871604, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_Name
+      value: TurretRock (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871604, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc43191a23697164ab8d273ae9529d87, type: 3}
+--- !u!1 &914798132 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8435962509250871604, guid: cc43191a23697164ab8d273ae9529d87,
+    type: 3}
+  m_PrefabInstance: {fileID: 914798131}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &914798138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914798132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ec5d2f9e6a3f8a488270d9a78547ba5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RockBullet: {fileID: 8517625352372101681, guid: 991fe60e24019704a96b761a831bbbbe,
+    type: 3}
+  RockBoss: {fileID: 1749173458}
 --- !u!1001 &918952542
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2648,6 +2933,101 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 918952542}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &930735660
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.38268343
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.92387956
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871602, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -135
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871604, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_Name
+      value: TurretRock (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435962509250871604, guid: cc43191a23697164ab8d273ae9529d87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc43191a23697164ab8d273ae9529d87, type: 3}
+--- !u!1 &930735661 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8435962509250871604, guid: cc43191a23697164ab8d273ae9529d87,
+    type: 3}
+  m_PrefabInstance: {fileID: 930735660}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &930735667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930735661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ec5d2f9e6a3f8a488270d9a78547ba5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RockBullet: {fileID: 8517625352372101681, guid: 991fe60e24019704a96b761a831bbbbe,
+    type: 3}
+  RockBoss: {fileID: 1749173458}
 --- !u!1 &1005044183 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 259202356744916694, guid: 650cc3dfced73a94e9fd4946f318a2dc,
@@ -3503,7 +3883,7 @@ PrefabInstance:
     - target: {fileID: 1785487515742945083, guid: 843add3ce4543f744be63268354d140b,
         type: 3}
       propertyPath: Player_hp
-      value: 100
+      value: 100000
       objectReference: {fileID: 0}
     - target: {fileID: 1785487515742945084, guid: 843add3ce4543f744be63268354d140b,
         type: 3}
@@ -5637,6 +6017,11 @@ MonoBehaviour:
   - {fileID: 1188748938}
   - {fileID: 1676497519}
   FireHoleList: []
+  RockTurretList:
+  - {fileID: 561283179}
+  - {fileID: 914798132}
+  - {fileID: 742701038}
+  - {fileID: 930735661}
   Player: {fileID: 1265923656}
   BossHeart: {fileID: 2538161278481986140, guid: af0d8a7ffd6e31948a3f5593473f5a0f,
     type: 3}
@@ -5646,6 +6031,8 @@ MonoBehaviour:
     type: 3}
   BlackCube: {fileID: 1278871064}
   RockBullet: {fileID: 8517625352372101681, guid: 991fe60e24019704a96b761a831bbbbe,
+    type: 3}
+  RockTurret: {fileID: 8435962509250871604, guid: cc43191a23697164ab8d273ae9529d87,
     type: 3}
   BossHP: 12
   TreeCount: 0

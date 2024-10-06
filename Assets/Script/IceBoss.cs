@@ -129,6 +129,7 @@ public class IceBoss : Boss
  
     private IEnumerator spawnHearts()
     {
+
         var position = new Vector3(UnityEngine.Random.Range(-12f, 12f), UnityEngine.Random.Range(-7f, 7f), 0);
 
         Instantiate(BossHeart, position, Quaternion.identity);
