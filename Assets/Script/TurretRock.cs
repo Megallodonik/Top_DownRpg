@@ -20,16 +20,13 @@ public class TurretRock : MonoBehaviour
     }
     private IEnumerator Shoot()
     {
-        
+        yield return new WaitForSeconds(3f);
         for (int i = 0; i < 40; i++)
         {
             Instantiate(RockBullet, transform.position, new Quaternion(0, 0, 0, 0));
             
             yield return new WaitForSeconds(0.5f);
-            if (i == 39)
-            {
-                RockBoss.ChoosingAttack();
-            }
+
 
         }
 

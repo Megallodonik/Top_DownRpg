@@ -40,11 +40,16 @@ public class TrentProtectorBoss : Boss
             GreenSpikeList.Add(temp);
         }
         rb = GetComponent<Rigidbody2D>();
-        StartCoroutine(ChooseAttack());
+        Invoke("StartChoose", 5f);
         //Debug.Log("circleAttack");
         //CircleAttack();
     }
+    private void StartChoose()
+    {
+        StartCoroutine(ChooseAttack());
 
+
+    }
     void FixedUpdate()
     {
         transform.rotation *= Quaternion.Euler(0f, 0f, 10f);

@@ -29,7 +29,7 @@ public class RockBullet : Obstacle
     }
     private IEnumerator timer_2()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         if (transform.position.x == direction.x && transform.position.y == direction.y)
         {
             this.gameObject.SetActive(false);
@@ -59,8 +59,7 @@ public class RockBullet : Obstacle
 
     private void FixedUpdate()
     {
-        Debug.Log(direction);
-        Debug.Log(rb.position);
+
         float step = 0.2f;
         transform.position = Vector3.MoveTowards(transform.position, direction, step);
     }

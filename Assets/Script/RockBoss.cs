@@ -44,6 +44,7 @@ public class RockBoss : Boss
         }
         lineRenderer = GetComponent<LineRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        LastAttack = Attacks.BulletHellAttack;
         Invoke("ChoosingAttack", 5f);
         //StartCoroutine(SpawnRocksAttackCor());
         //StartCoroutine(BulletHellAttackCor());
@@ -54,9 +55,14 @@ public class RockBoss : Boss
     }
     public void ChoosingAttack()
     {
-        StopCoroutine(BulletHellAttackCor());
-        StopCoroutine(TurretAttackCor());
-        StopCoroutine(SpawnRocksAttackCor());
+        for (int i = 0; i < RockTurretList.Count; i++)
+        {
+            RockTurretList[i].SetActive(false);
+
+
+        }
+        StopAllCoroutines();
+        StartCoroutine(spawnHearts());
         StartCoroutine(ChooseAttack());
     }
     // Update is called once per frame
@@ -85,12 +91,13 @@ public class RockBoss : Boss
     private void BossHPChange(int HpChange)
     {
         BossHP += HpChange;
-
+        Debug.Log(BossHP);
 
         BossHPList[BossHP].gameObject.SetActive(false);
 
         if (BossHP <= 0)
         {
+           
             StopAllCoroutines();
         }
     }
@@ -99,12 +106,6 @@ public class RockBoss : Boss
 
         BossHPChange(-1);
 
-        TreeCount++;
-        if (TreeCount >= 4)
-        {
-            StartCoroutine(ChooseAttack());
-
-        }
 
 
     }
@@ -122,13 +123,14 @@ public class RockBoss : Boss
         
         BlackCube.transform.position = Player.transform.position;
         BlackCube.SetActive(true);
+        yield return new WaitForSeconds(3f);
         for (int i = 0; i < 40; i++)
         {
             Instantiate(RockBullet, transform.position, Quaternion.identity);
             yield return new WaitForSeconds(0.5f);
             if (i == 39)
             {
-                StartCoroutine(ChooseAttack());
+                ChoosingAttack();
             }
         }
         BlackCube.SetActive(false);
@@ -145,50 +147,50 @@ public class RockBoss : Boss
 
         }
 
-        yield return new WaitForSeconds(23f);
+        yield return new WaitForSeconds(25f);
+        ChoosingAttack();
 
-        
     }
     private IEnumerator SpawnRocksAttackCor()
     {
         bool passed = false;
 
-            for (int b = 0; b < DottedCircleList.Count; b++)
-            {
-                DottedCircleList[b].gameObject.SetActive(true);
-                yield return new WaitForSeconds(0.1f);
-                DottedCircleList[b].gameObject.SetActive(false);
-            }
-            yield return new WaitForSeconds(2f);
+        for (int b = 0; b < DottedCircleList.Count; b++)
+        {
+            DottedCircleList[b].gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.1f);
+            DottedCircleList[b].gameObject.SetActive(false);
+        }
+        yield return new WaitForSeconds(2f);
 
-            for (int b = 0; b < DottedCircleList.Count; b++)
-            {
-                DottedCircleList[b].gameObject.SetActive(true);
+        for (int b = 0; b < DottedCircleList.Count; b++)
+        {
+            DottedCircleList[b].gameObject.SetActive(true);
 
-            }
-            yield return new WaitForSeconds(0.5f);
+        }
+        yield return new WaitForSeconds(0.5f);
 
-            for (int b = 0; b < DottedCircleList.Count; b++)
-            {
+        for (int b = 0; b < DottedCircleList.Count; b++)
+        {
 
-                DottedCircleList[b].gameObject.SetActive(false);
+            DottedCircleList[b].gameObject.SetActive(false);
 
-            }
-            yield return new WaitForSeconds(0.5f);
-            for (int b = 0; b < FireHoleList.Count; b++)
-            {
-                FireHoleList[b].gameObject.SetActive(true);
+        }
+        yield return new WaitForSeconds(0.5f);
+        for (int b = 0; b < FireHoleList.Count; b++)
+        {
+            FireHoleList[b].gameObject.SetActive(true);
 
-            }
-            yield return new WaitForSeconds(2f);
-            for (int b = 0; b < FireHoleList.Count; b++)
-            {
-                FireHoleList[b].gameObject.SetActive(false);
-                passed = true;
-            }
+        }
+        yield return new WaitForSeconds(2f);
+        for (int b = 0; b < FireHoleList.Count; b++)
+        {
+            FireHoleList[b].gameObject.SetActive(false);
+            passed = true;
+        }
         if (passed)
         {
-            StartCoroutine(ChooseAttack());
+            ChoosingAttack();
         }
 
 
@@ -201,8 +203,8 @@ public class RockBoss : Boss
 
         Instantiate(BossHeart, position, Quaternion.identity);
 
-        yield return new WaitForSeconds(10f);
-        StartCoroutine(spawnHearts());
+        yield return null;
+        
     }
 
 
@@ -219,34 +221,25 @@ public class RockBoss : Boss
 
 
         }
-        StopCoroutine(BulletHellAttackCor());
-        StopCoroutine(TurretAttackCor());
-        StopCoroutine(SpawnRocksAttackCor());
+        Debug.Log(LastAttack);
+
         Debug.Log("Chooseattackcor");
         yield return new WaitForSeconds(2f);
         int AttacksCount = Enum.GetNames(typeof(Attacks)).Length;
         int rnd = UnityEngine.Random.Range(0, AttacksCount);
-
+        Debug.Log((Attacks)rnd);
         switch ((Attacks)rnd)
         {
             case Attacks.SpawnRocksAttack:
                 if (LastAttack != Attacks.SpawnRocksAttack)
                 {
 
-                    for (int i = 0; i < RockTurretList.Count; i++)
-                    {
-                        RockTurretList[i].SetActive(false);
-
-
-                    }
                     Debug.Log("DashAttack");
                     LastAttack = Attacks.SpawnRocksAttack;
-                    StopCoroutine(BulletHellAttackCor());
-                    StopCoroutine(TurretAttackCor());
-                    StartCoroutine(SpawnRocksAttackCor());
+                   
                     
-
-
+                    StartCoroutine(SpawnRocksAttackCor());
+                    StopCoroutine(ChooseAttack());
                     yield return null;
                     break;
 
@@ -254,15 +247,7 @@ public class RockBoss : Boss
                 else
                 {
 
-                    for (int i = 0; i < RockTurretList.Count; i++)
-                    {
-                        RockTurretList[i].SetActive(false);
 
-
-                    }
-                    StopCoroutine(BulletHellAttackCor());
-                    StopCoroutine(TurretAttackCor());
-                    StopCoroutine(SpawnRocksAttackCor());
                     ChoosingAttack();
 
 
@@ -272,18 +257,13 @@ public class RockBoss : Boss
             case Attacks.BulletHellAttack:
                 if (LastAttack != Attacks.BulletHellAttack)
                 {
-
-                    for (int i = 0; i < RockTurretList.Count; i++)
-                    {
-                        RockTurretList[i].SetActive(false);
-
-
-                    }
-                    StartCoroutine(BulletHellAttackCor());
-                    StopCoroutine(TurretAttackCor());
-                    StopCoroutine(SpawnRocksAttackCor());
-                    Debug.Log("AroundAttack");
                     LastAttack = Attacks.BulletHellAttack;
+                    
+                    
+                    StartCoroutine(BulletHellAttackCor());
+                    StopCoroutine(ChooseAttack());
+                    Debug.Log("BulletHellAttack");
+                    
                     
                     yield return null;
                     break;
@@ -291,15 +271,7 @@ public class RockBoss : Boss
                 else
                 {
 
-                    for (int i = 0; i < RockTurretList.Count; i++)
-                    {
-                        RockTurretList[i].SetActive(false);
 
-
-                    }
-                    StopCoroutine(BulletHellAttackCor());
-                    StopCoroutine(TurretAttackCor());
-                    StopCoroutine(SpawnRocksAttackCor());
                     ChoosingAttack();
                     yield return null;
                     break;
@@ -307,11 +279,13 @@ public class RockBoss : Boss
             case Attacks.RockTurretAttack:
                 if (LastAttack != Attacks.RockTurretAttack)
                 {
-                    StopCoroutine(BulletHellAttackCor());
-                    StartCoroutine(TurretAttackCor());
-                    StopCoroutine(SpawnRocksAttackCor());
-                    Debug.Log("RockTurret");
                     LastAttack = Attacks.RockTurretAttack;
+                    
+                   
+                    StartCoroutine(TurretAttackCor());
+                    StopCoroutine(ChooseAttack());
+                    Debug.Log("RockTurret");
+                    
                     
                     yield return null;
                     break;
@@ -319,15 +293,8 @@ public class RockBoss : Boss
                 else
                 {
 
-                    for (int i = 0; i < RockTurretList.Count; i++)
-                    {
-                        RockTurretList[i].SetActive(false);
 
 
-                    }
-                    StopCoroutine(BulletHellAttackCor());
-                    StopCoroutine(TurretAttackCor());
-                    StopCoroutine(SpawnRocksAttackCor());
                     ChoosingAttack();
                     yield return null;
                     break;

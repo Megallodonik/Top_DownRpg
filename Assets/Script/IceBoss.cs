@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using static IceBoss;
 using static UnityEngine.GraphicsBuffer;
@@ -84,19 +85,21 @@ public class IceBoss : Boss
         if (BossHP <= 0)
         {
             StopAllCoroutines();
+            StartCoroutine(nextBoss());
         }
+    }
+    private IEnumerator nextBoss()
+    {
+        yield return new WaitForSeconds(10f);
+        SceneManager.LoadScene("ThirdBoss");
+
     }
     private void TreeCutter_OnTreeCut()
     {
 
         BossHPChange(-1);
 
-        TreeCount++;
-        if (TreeCount >= 4)
-        {
-            StartCoroutine(ChooseAttack());
 
-        }
 
 
     }

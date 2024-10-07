@@ -2120,6 +2120,11 @@ PrefabInstance:
       propertyPath: AxeImg
       value: 
       objectReference: {fileID: 1752324363}
+    - target: {fileID: 1785487515742945083, guid: 843add3ce4543f744be63268354d140b,
+        type: 3}
+      propertyPath: Player_hp
+      value: 100000
+      objectReference: {fileID: 0}
     - target: {fileID: 1785487515742945084, guid: 843add3ce4543f744be63268354d140b,
         type: 3}
       propertyPath: joystick
