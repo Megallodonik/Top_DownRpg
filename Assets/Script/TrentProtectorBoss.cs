@@ -222,7 +222,7 @@ public class TrentProtectorBoss : Boss
         StartCoroutine(LaserSpawn());
         LaserCircle.SetActive(true);
         // вокруг босса вращается спрайт с лазером
-        for (int i = 0; i < 1200; i++)
+        for (int i = 0; i < 600; i++)
         {
             Debug.Log("laserCircleRot coroutine");
             LaserCircle.transform.rotation *= Quaternion.Euler(0f, 0f, 10f);

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.Rendering;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
@@ -25,7 +24,7 @@ public class TurretRock : MonoBehaviour
         {
             Instantiate(RockBullet, transform.position, new Quaternion(0, 0, 0, 0));
             
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1f);
 
 
         }

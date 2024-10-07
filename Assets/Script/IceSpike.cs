@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IceSpike : Obstacle
 {
-    float moveSpeed = 150f;
+    float moveSpeed = 70f;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +16,10 @@ public class IceSpike : Obstacle
     }
     // Update is called once per frame
     void Update()
+    {
+        
+    }
+    private void FixedUpdate()
     {
         
     }
@@ -37,7 +41,7 @@ public class IceSpike : Obstacle
 
                 float step = moveSpeed * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, new Vector3(startPos - 30, transform.position.y), step);
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForFixedUpdate();
             }
             transform.position = new Vector3(startPos, transform.position.y);
             this.gameObject.SetActive(false);
@@ -50,7 +54,7 @@ public class IceSpike : Obstacle
 
                 float step = moveSpeed * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, new Vector3(startPos + 30, transform.position.y), step);
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForFixedUpdate();
             }
             transform.position = new Vector3(startPos, transform.position.y);
             this.gameObject.SetActive(false);

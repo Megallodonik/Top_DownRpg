@@ -33,7 +33,7 @@ public class IceBoss : Boss
     public int BossHP = 12;
     private Attacks LastAttack;
     private Rigidbody2D rb;
-    private float moveSpeed = 150f;
+    private float moveSpeed = 30f;
     public int TreeCount;
     bool rotation = true;
     bool followPlayer = false;
@@ -161,8 +161,8 @@ public class IceBoss : Boss
                 
                 float step = moveSpeed * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, DashPoints[rnd], step);
-                
-                yield return new WaitForSeconds(0.01f);
+
+                yield return new WaitForFixedUpdate();
             }
             
             Vector3 pos = Player.transform.position;
@@ -177,7 +177,7 @@ public class IceBoss : Boss
                 float step = moveSpeed * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, pos, step);
 
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForFixedUpdate();
             }
 
 
@@ -186,7 +186,7 @@ public class IceBoss : Boss
         {
             float step = moveSpeed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, 0), step);
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForFixedUpdate();
         }
         
         StartCoroutine(ChooseAttack());
@@ -237,7 +237,7 @@ public class IceBoss : Boss
             float speed = 25f;
             float step = speed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, 0), step);
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForFixedUpdate();
         }
         StartCoroutine(ChooseAttack());
     }
