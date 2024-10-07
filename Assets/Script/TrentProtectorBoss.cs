@@ -21,6 +21,7 @@ public class TrentProtectorBoss : Boss
     [SerializeField] List<GameObject> BossHPList = new List<GameObject>();
     [SerializeField] List<GameObject> GreenSpikeList = new List<GameObject>();
     [SerializeField] GameObject GreenSpike;
+    [SerializeField] MenuContorller MenuContorller;
     float positionX, positionY, angle = 0f;
     public int BossHP = 12;
     public Attacks LastAttack;
@@ -40,7 +41,7 @@ public class TrentProtectorBoss : Boss
             GreenSpikeList.Add(temp);
         }
         rb = GetComponent<Rigidbody2D>();
-        Invoke("StartChoose", 5f);
+        Invoke("SquareAttack", 2f);
         //Debug.Log("circleAttack");
         //CircleAttack();
     }
@@ -83,6 +84,7 @@ public class TrentProtectorBoss : Boss
     }
     private IEnumerator nextBoss()
     {
+        MenuContorller.NextBoss();
         yield return new WaitForSeconds(10f);
         SceneManager.LoadScene("SecondBoss");
         
@@ -93,7 +95,7 @@ public class TrentProtectorBoss : Boss
         BossHPChange(-1);
 
         TreeCount++;
-        if (TreeCount >= 4)
+        if (TreeCount >= 4 && BossHP > 0)
         {
             StartCoroutine(ChooseAttack());
 

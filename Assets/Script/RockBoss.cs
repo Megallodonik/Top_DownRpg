@@ -19,7 +19,7 @@ public class RockBoss : Boss
     [SerializeField] GameObject BlackCube;
     [SerializeField] GameObject RockBullet;
     [SerializeField] GameObject RockTurret;
-
+    [SerializeField] MenuContorller MenuContorller;
     LineRenderer lineRenderer;
 
     float positionX, positionY, angle = 0f;
@@ -97,7 +97,7 @@ public class RockBoss : Boss
 
         if (BossHP <= 0)
         {
-           
+            MenuContorller.BeatGame();
             StopAllCoroutines();
         }
     }

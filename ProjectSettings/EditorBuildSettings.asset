@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ThirdBoss.unity
     guid: 5348b1285ae40a947ae1251274159c4e
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 69d50afbfecd5e042a1b17b4896e4f7a
   m_configObjects: {}

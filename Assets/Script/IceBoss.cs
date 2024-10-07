@@ -23,8 +23,10 @@ public class IceBoss : Boss
     [SerializeField] List<GameObject> DottedLaserList = new List<GameObject>();
     [SerializeField] List<Vector3> DashPoints = new List<Vector3>();
     [SerializeField] GameObject Player;
+    [SerializeField] PlayerHP PlayerHP;
     [SerializeField] GameObject GreenSpike;
     [SerializeField] GameObject BossHeart;
+    [SerializeField] MenuContorller MenuContorller;
     LineRenderer lineRenderer;
 
     float positionX, positionY, angle = 0f;
@@ -90,6 +92,7 @@ public class IceBoss : Boss
     }
     private IEnumerator nextBoss()
     {
+        MenuContorller.NextBoss();
         yield return new WaitForSeconds(10f);
         SceneManager.LoadScene("ThirdBoss");
 
@@ -208,6 +211,7 @@ public class IceBoss : Boss
         if (other.CompareTag("Player"))
         {
             HitPlayer(-1);
+           
         }
     }
 
